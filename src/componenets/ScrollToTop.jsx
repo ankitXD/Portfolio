@@ -47,7 +47,7 @@ export function BackToTopButton({ offset = 240 }) {
       type="button"
       onClick={scrollTop}
       aria-label="Back to top"
-      className={`fixed bottom-5 right-5 z-50 rounded-full bg-emerald-600 p-3 text-white shadow-lg transition-opacity hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 ${
+      className={`fixed bottom-5 right-5 z-50 rounded-lg bg-emerald-600 p-3 text-white shadow-lg transition-opacity hover:bg-emerald-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500 ${
         visible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >

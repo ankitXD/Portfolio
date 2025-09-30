@@ -172,7 +172,7 @@ const Navbar = () => {
                   scrollTo(e, n.id);
                   setMenuOpen(false);
                 }}
-                className="block rounded-md px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors hover:bg-neutral-200/60 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-700/60 dark:hover:text-white"
+                className="block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors hover:bg-neutral-200/60 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-700/60 dark:hover:text-white"
               >
                 {n.label}
               </a>

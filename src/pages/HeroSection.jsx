@@ -142,7 +142,7 @@ const HeroSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 rounded"
+                className="focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 rounded-lg"
               >
                 {s.icon}
               </a>

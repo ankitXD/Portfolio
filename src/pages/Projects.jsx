@@ -60,7 +60,7 @@ const projects = [
 ];
 
 const ProjectCard = ({ project }) => (
-  <article className="group relative flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition-colors hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-600">
+  <article className="group relative flex h-full flex-col rounded-lg border border-neutral-200 bg-white p-5 shadow-sm transition-colors hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-600">
     <div className="mb-4">
       <h3 className="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 line-clamp-1">
         {project.name}
@@ -74,7 +74,7 @@ const ProjectCard = ({ project }) => (
         {project.technologies.map((t) => (
           <li
             key={t}
-            className="rounded-md border border-neutral-300 bg-neutral-100 px-2 py-1 text-[10px] font-medium text-neutral-700 transition-colors duration-150 hover:border-neutral-400 hover:bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:bg-neutral-700 cursor-pointer"
+            className="rounded-lg border border-neutral-300 bg-neutral-100 px-2 py-1 text-[10px] font-medium text-neutral-700 transition-colors duration-150 hover:border-neutral-400 hover:bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:bg-neutral-700 cursor-pointer"
           >
             {t}
           </li>
@@ -87,7 +87,7 @@ const ProjectCard = ({ project }) => (
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Visit website for ${project.name}`}
-            className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
           >
             <FiGlobe className="h-3.5 w-3.5" />
             <span className="tracking-tight">Website</span>
@@ -99,7 +99,7 @@ const ProjectCard = ({ project }) => (
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View source code for ${project.name}`}
-            className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
           >
             <FaGithub className="h-3.5 w-3.5" />
             <span className="tracking-tight">Source</span>
@@ -120,7 +120,7 @@ const Projects = () => {
       <h3 className="mb-5 uppercase text-center text-xl tracking-tight">
         Projects
       </h3>
-      <h2 className="mb-10 text-center text-3xl  tracking-tight">
+      <h2 className="mb-10 text-center text-3xl tracking-tight">
         Proof of Work
       </h2>
 

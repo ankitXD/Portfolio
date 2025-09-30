@@ -44,7 +44,7 @@ const FreelanceServices = () => {
       <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {services.map((s) => (
           <li key={s.id} className="group">
-            <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm transition hover:shadow-md">
+            <div className="relative flex h-full flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm transition hover:shadow-md">
               <div
                 className={`pointer-events-none absolute inset-0 bg-gradient-to-b ${s.accent} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
                 aria-hidden="true"
@@ -63,7 +63,7 @@ const FreelanceServices = () => {
               <div className="relative mt-6 pt-4">
                 <button
                   type="button"
-                  className="inline-flex items-center rounded-full border border-emerald-600 px-4 py-2 text-xs font-medium uppercase tracking-wide text-emerald-700 transition hover:bg-emerald-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                  className="inline-flex items-center rounded-lg border border-emerald-600 px-4 py-2 text-xs font-medium uppercase tracking-wide text-emerald-700 transition hover:bg-emerald-600 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
                 >
                   Get Quote
                 </button>

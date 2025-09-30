@@ -29,7 +29,7 @@ const WorkExperience = () => {
         {experiences.map((exp) => (
           <article
             key={exp.id}
-            className="relative overflow-hidden rounded-xl border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm transition hover:shadow-md"
+            className="relative overflow-hidden rounded-lg border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm transition hover:shadow-md"
           >
             <header className="mb-4">
               <h3 className="text-xl font-semibold tracking-tight">

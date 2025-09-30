@@ -56,7 +56,7 @@ const Skills = () => {
         {skills.map((s) => (
           <li key={s.label}>
             <div
-              className="flex h-24 w-full flex-col items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white text-center text-[0.65rem] font-medium uppercase tracking-wide text-neutral-700 shadow-sm transition hover:border-emerald-400 hover:shadow focus-within:ring-2 focus-within:ring-emerald-500"
+              className="flex h-24 w-full flex-col items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white text-center text-[0.65rem] font-medium uppercase tracking-wide text-neutral-700 shadow-sm transition hover:border-emerald-400 hover:shadow focus-within:ring-2 focus-within:ring-emerald-500"
               role="group"
               aria-label={s.label}
             >
