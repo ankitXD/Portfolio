@@ -144,15 +144,7 @@ const GetInTouch = () => {
                   href="mailto:chrispaul1311@gmail.com"
                   className="text-emerald-600 underline-offset-4 hover:underline"
                 >
-                  chrispaul1311@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+918928016153"
-                  className="text-neutral-700 hover:text-emerald-600"
-                >
-                  +91 8928016153
+                  guptankit.2003@gmail.com
                 </a>
               </li>
             </ul>
@@ -187,7 +179,7 @@ const GetInTouch = () => {
               </li>
               <li>
                 <a
-                  href="mailto:chrispaul1311@gmail.com"
+                  href="mailto:guptankit.2003@gmail.com"
                   className="flex h-10 w-10 items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition hover:border-emerald-400 hover:text-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
                   aria-label="Email"
                 >

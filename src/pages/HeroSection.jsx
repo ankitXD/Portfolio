@@ -82,7 +82,11 @@ const HeroSection = () => {
       href: "https://www.linkedin.com/in/ankit-gupta-s3v3nc3/",
       icon: <FaLinkedin />,
     },
-    { label: "Email", href: "guptankit.2003@gmail.com", icon: <FaEnvelope /> },
+    {
+      label: "Email",
+      href: "mailto:guptankit.2003@gmail.com",
+      icon: <FaEnvelope />,
+    },
   ];
 
   return (
@@ -103,10 +107,10 @@ const HeroSection = () => {
             fontFamily: `'Poppins', 'Inter', 'Segoe UI', system-ui, sans-serif`,
           }}
         >
-          ANKIT GUPTA
+          Ankit Gupta
         </h1>
 
-        <p className="mt-5 text-md  tracking-wide text-neutral-500 dark:text-neutral-400">
+        <p className="mt-5 text-md tracking-wide text-neutral-500 dark:text-neutral-400">
           Available for Freelance Projects
         </p>
       </div>
