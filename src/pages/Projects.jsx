@@ -1,89 +1,110 @@
 import React from "react";
+import { FiGlobe } from "react-icons/fi";
+import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
     id: "toundra",
     name: "Toundra",
-    tag: "Freelance",
-    image: "https://via.placeholder.com/480x320?text=Toundra",
-    live: "#",
-    github: "#",
-    points: [
-      "Design & Development: Customized website design using modern UI/UX principles, enhancing user engagement and accessibility.",
-      "Content Management: Integrated Link content management system (CMS) for easy updates, allowing the client to manage content effortlessly.",
-      "SEO Optimization: Implemented SEO best practices, improving website visibility and search engine rankings.",
-    ],
+    description:
+      "A fitness training platform with 6000+ paid users, built for real-time sessions and performance tracking.",
+    website: "#",
+    source: "#",
     technologies: ["Figma", "React.js", "Tailwind CSS", "Express.js"],
+  },
+  {
+    id: "portfolio",
+    name: "Portfolio Site",
+    description:
+      "My personal portfolio showcasing projects, skills, and a minimalist dark/light experience.",
+    website: "#",
+    source: "#",
+    technologies: ["Vite", "React", "Tailwind", "Vanta.js"],
+  },
+  {
+    id: "cms-lite",
+    name: "CMS Lite",
+    description:
+      "A lightweight content management interface for small teams needing quick edits and publishing.",
+    website: "#",
+    source: "#",
+    technologies: ["Node.js", "Express", "MongoDB", "Tailwind"],
+  },
+  {
+    id: "analytics-dashboard",
+    name: "Analytics Dashboard",
+    description:
+      "Modular dashboard for tracking product KPIs with pluggable widgets and role-based access.",
+    website: "#",
+    source: "#",
+    technologies: ["Next.js", "ShadCN", "PostgreSQL", "Prisma"],
+  },
+  {
+    id: "task-flow",
+    name: "Task Flow",
+    description:
+      "Kanban-inspired task management tool focusing on speed, keyboard shortcuts, and offline support.",
+    website: "#",
+    source: "#",
+    technologies: ["React", "Redux Toolkit", "IndexedDB", "Tailwind"],
+  },
+  {
+    id: "analytics-dashboard",
+    name: "Analytics Dashboard",
+    description:
+      "Modular dashboard for tracking product KPIs with pluggable widgets and role-based access.",
+    website: "#",
+    source: "#",
+    technologies: ["Next.js", "ShadCN", "PostgreSQL", "Prisma"],
   },
 ];
 
 const ProjectCard = ({ project }) => (
-  <article className="group relative flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white/70 shadow-sm backdrop-blur-sm transition hover:shadow-md md:flex-row">
-    <div className="relative w-full shrink-0 md:w-1/2">
-      <img
-        src={project.image}
-        alt={`${project.name} preview`}
-        className="h-full w-full object-cover"
-        loading="lazy"
-      />
-      {project.tag && (
-        <span className="absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium uppercase tracking-wide text-white shadow">
-          {project.tag}
-        </span>
-      )}
+  <article className="group relative flex h-full flex-col rounded-xl border border-neutral-200 bg-white p-5 shadow-sm transition-colors hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-600">
+    <div className="mb-4">
+      <h3 className="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 line-clamp-1">
+        {project.name}
+      </h3>
     </div>
-
-    <div className="flex flex-col justify-between gap-6 p-6 md:w-1/2">
-      <header>
-        <h3 className="text-xl font-semibold tracking-tight">{project.name}</h3>
-      </header>
-
-      <ul className="space-y-3 text-sm leading-relaxed text-neutral-700">
-        {project.points.map((p, i) => (
-          <li key={i} className="flex gap-2">
-            <span className="text-emerald-500">•</span>
-            <span>{p}</span>
+    <p className="mb-4 line-clamp-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+      {project.description}
+    </p>
+    <div className="mt-auto flex flex-col gap-4">
+      <ul className="flex flex-wrap gap-2">
+        {project.technologies.map((t) => (
+          <li
+            key={t}
+            className="rounded-md border border-neutral-300 bg-neutral-100 px-2 py-1 text-[10px] font-medium text-neutral-700 transition-colors duration-150 hover:border-neutral-400 hover:bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:bg-neutral-700 cursor-pointer"
+          >
+            {t}
           </li>
         ))}
       </ul>
-
-      <div className="mt-2 flex flex-wrap items-center gap-4">
-        {project.live && (
+      <div className="flex items-center gap-3 text-[11px] font-medium">
+        {project.website && (
           <a
-            href={project.live}
+            href={project.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-emerald-600 underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+            aria-label={`Visit website for ${project.name}`}
+            className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
           >
-            Live
+            <FiGlobe className="h-3.5 w-3.5" />
+            <span className="tracking-tight">Website</span>
           </a>
         )}
-        {project.github && (
+        {project.source && (
           <a
-            href={project.github}
+            href={project.source}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-emerald-600 underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+            aria-label={`View source code for ${project.name}`}
+            className="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
           >
-            GitHub
+            <FaGithub className="h-3.5 w-3.5" />
+            <span className="tracking-tight">Source</span>
           </a>
         )}
-      </div>
-
-      <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-neutral-500">
-          Technologies Used
-        </p>
-        <ul className="flex flex-wrap gap-2">
-          {project.technologies.map((t) => (
-            <li
-              key={t}
-              className="rounded-md border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700"
-            >
-              {t}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   </article>
@@ -99,7 +120,7 @@ const Projects = () => {
       <h2 className="mb-10 text-center text-3xl font-bold tracking-tight">
         Projects
       </h2>
-      <div className="space-y-10">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
           <ProjectCard key={p.id} project={p} />
         ))}

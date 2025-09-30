@@ -97,12 +97,12 @@ const HeroSection = () => {
       aria-label="Hero"
     >
       {/* Content wrapper to ensure readable contrast */}
-      <div className="relative z-10 flex flex-col items-center text-center">
+      <div className="relative z-10 flex flex-col items-center text-center mt-8">
         <p className="text-xs sm:text-lg uppercase font-medium text-neutral-700 dark:text-neutral-300 mb-5">
           Full Stack Developer
         </p>
         <h1
-          className="mb-5 tracking-tight text-5xl sm:text-7xl md:text-8xl leading-none drop-shadow-sm text-neutral-900 dark:text-neutral-50"
+          className="mb-5 tracking-tighter text-5xl sm:text-7xl md:text-8xl leading-none drop-shadow-sm text-neutral-900 dark:text-neutral-50"
           style={{
             fontFamily: `'Poppins', 'Inter', 'Segoe UI', system-ui, sans-serif`,
           }}
@@ -110,8 +110,10 @@ const HeroSection = () => {
           Ankit Gupta
         </h1>
 
-        <p className="mt-5 text-md tracking-wide text-neutral-500 dark:text-neutral-400">
-          Available for Freelance Projects
+        <p className="mt-5 text-xl tracking-wide text-neutral-500 dark:text-neutral-400">
+          Building modern web applications with React, and Node.js.
+          <br />
+          Focused on clean code and great user experiences.
         </p>
       </div>
 

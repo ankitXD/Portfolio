@@ -12,7 +12,7 @@ const LandingPage = () => {
     <div>
       <HeroSection />
       <Projects />
-      <Skills />
+      {/* <Skills /> */}
       <AboutMe />
       <WorkExperience />
       <FreelanceServices />
