@@ -104,7 +104,7 @@ const HeroSection = () => {
         <h1
           className="mb-5 tracking-tighter text-5xl sm:text-7xl md:text-8xl leading-none drop-shadow-sm text-neutral-900 dark:text-neutral-50"
           style={{
-            fontFamily: `'Poppins', 'Inter', 'Segoe UI', system-ui, sans-serif`,
+            fontFamily: `Oswald, sans-serif`,
           }}
         >
           Ankit Gupta

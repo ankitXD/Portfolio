@@ -12,11 +12,11 @@ const LandingPage = () => {
     <div>
       <HeroSection />
       <Projects />
-      {/* <Skills /> */}
       <AboutMe />
-      <WorkExperience />
-      <FreelanceServices />
       <GetInTouch />
+      {/* <Skills /> */}
+      {/* <WorkExperience /> */}
+      {/* <FreelanceServices /> */}
     </div>
   );
 };

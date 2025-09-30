@@ -92,6 +92,9 @@ const Navbar = () => {
           href="#home"
           onClick={(e) => scrollTo(e, "home")}
           className="text-lg tracking-tight text-neutral-900 hover:text-neutral-700 dark:text-neutral-100 dark:hover:text-neutral-300"
+          style={{
+            fontFamily: `SUSE Mono, sans-serif`,
+          }}
         >
           Ankit Gupta
         </a>

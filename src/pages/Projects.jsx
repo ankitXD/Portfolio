@@ -117,9 +117,13 @@ const Projects = () => {
       className="mx-auto max-w-5xl px-6 py-16 scroll-mt-20"
       aria-label="Projects"
     >
-      <h2 className="mb-10 text-center text-3xl font-bold tracking-tight">
+      <h3 className="mb-5 uppercase text-center text-xl tracking-tight">
         Projects
+      </h3>
+      <h2 className="mb-10 text-center text-3xl  tracking-tight">
+        Proof of Work
       </h2>
+
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
           <ProjectCard key={p.id} project={p} />
