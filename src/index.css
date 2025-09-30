@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base theming: apply background/text colors that react to .dark on <html> */
+body {
+  @apply bg-white text-neutral-900 transition-colors duration-300 ease-out dark:bg-neutral-950 dark:text-neutral-100;
+}
+
+/* Optional utility for sections to get subtle divider color in both modes */
+.border-theme {
+  @apply border-neutral-200 dark:border-neutral-800;
+}
+
