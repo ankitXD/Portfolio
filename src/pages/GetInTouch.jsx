@@ -28,10 +28,10 @@ const GetInTouch = () => {
       id="contact"
     >
       <header className="mb-10 text-center">
-        <h3 className="mb-5 uppercase text-center text-xl tracking-tight">
+        <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
           Contact
         </h3>
-        <h2 className="mb-10 text-center text-3xl tracking-tight">
+        <h2 className="text-3xl sm:text-4xl  tracking-tight text-neutral-900 dark:text-neutral-50">
           Let's Connect
         </h2>
       </header>

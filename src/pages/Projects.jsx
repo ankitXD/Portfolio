@@ -117,12 +117,14 @@ const Projects = () => {
       className="mx-auto max-w-5xl px-6 py-16 scroll-mt-20"
       aria-label="Projects"
     >
-      <h3 className="mb-5 uppercase text-center text-xl tracking-tight">
-        Projects
-      </h3>
-      <h2 className="mb-10 text-center text-3xl tracking-tight">
-        Proof of Work
-      </h2>
+      <div className="mb-12 text-center">
+        <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
+          Projects
+        </h3>
+        <h2 className="text-3xl sm:text-4xl tracking-tight text-neutral-900 dark:text-neutral-50">
+          Proof of Work
+        </h2>
+      </div>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p) => (
