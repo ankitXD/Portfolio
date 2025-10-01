@@ -13,6 +13,7 @@ const Navbar = () => {
   const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuReady, setMenuReady] = useState(false); // delays hover activation to avoid flash
 
   // Init theme
   useEffect(() => {
@@ -71,6 +72,17 @@ const Navbar = () => {
     }
   }, [menuOpen]);
 
+  // Delay enabling hover styles to prevent first item highlight on open (mobile quirk)
+  useEffect(() => {
+    if (menuOpen) {
+      setMenuReady(false);
+      const t = setTimeout(() => setMenuReady(true), 80); // small delay after animation
+      return () => clearTimeout(t);
+    } else {
+      setMenuReady(false);
+    }
+  }, [menuOpen]);
+
   const scrollTo = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
@@ -86,7 +98,7 @@ const Navbar = () => {
 
   return (
     <nav className={navClass}>
-      <div className="mx-auto flex h-full w-full max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-full w-full max-w-7xl items-center justify-between px-6">
         {/* Brand */}
         <a
           href="#home"
@@ -120,7 +132,7 @@ const Navbar = () => {
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle dark mode"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 bg-white/70 text-neutral-700 shadow-sm backdrop-blur transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:border-neutral-700 dark:bg-neutral-800/60 dark:text-neutral-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
           >
             {dark ? (
               <FaSun className="text-[15px]" />
@@ -136,7 +148,7 @@ const Navbar = () => {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 bg-white/70 text-neutral-700 shadow-sm backdrop-blur transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 md:hidden dark:border-neutral-700 dark:bg-neutral-800/60 dark:text-neutral-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none md:hidden dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
           >
             {menuOpen ? (
               <FiX className="h-5 w-5" />
@@ -163,7 +175,15 @@ const Navbar = () => {
             : "pointer-events-none scale-95 opacity-0"
         } border-b border-neutral-200 bg-white/90 backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/90`}
       >
-        <ul className="flex flex-col gap-4">
+        <button
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setMenuOpen(false)}
+          className="absolute right-4 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
+        >
+          <FiX className="h-4 w-4" />
+        </button>
+        <ul className="flex flex-col gap-4 mt-6">
           {navItems.map((n) => (
             <li key={n.id}>
               <a
@@ -172,7 +192,11 @@ const Navbar = () => {
                   scrollTo(e, n.id);
                   setMenuOpen(false);
                 }}
-                className="block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors hover:bg-neutral-200/60 hover:text-neutral-900 dark:text-neutral-200 dark:hover:bg-neutral-700/60 dark:hover:text-white"
+                className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
+                  menuReady
+                    ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
+                    : ""
+                }`}
               >
                 {n.label}
               </a>

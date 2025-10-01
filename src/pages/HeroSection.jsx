@@ -119,11 +119,12 @@ const HeroSection = () => {
 
       <div className="relative z-10 flex flex-wrap items-center justify-center gap-6 mt-2">
         <a
-          href="/Ankit_Gupta_Resume.pdf"
-          download
+          href="https://drive.google.com/file/d/1TSZ25-xWUakm0bMuLx6VrQsUY_0lAILv/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
           className="rounded-lg bg-neutral-900 px-8 py-3 text-sm font-semibold text-white shadow-sm ring-1 ring-neutral-900/20 transition hover:bg-neutral-800 hover:shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-300"
         >
-          Download Resume
+          Resume
         </a>
       </div>
 
