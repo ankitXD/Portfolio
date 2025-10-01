@@ -143,7 +143,7 @@ const GetInTouch = () => {
             <ul className="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
               <li>
                 <a
-                  href="mailto:chrispaul1311@gmail.com"
+                  href="mailto:guptankit.2003@gmail.com"
                   className="text-neutral-700 underline-offset-4 hover:underline dark:text-neutral-300 dark:hover:text-neutral-100"
                 >
                   guptankit.2003@gmail.com
