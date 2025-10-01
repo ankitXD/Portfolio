@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./componenets/Layout";
 import LandingPage from "./componenets/LandingPage";
-import ScrollToTop, { BackToTopButton } from "./componenets/ScrollToTop";
+import ScrollToTop from "./componenets/ScrollToTop";
 
 const App = () => {
   return (
@@ -13,7 +13,6 @@ const App = () => {
           <Route index element={<LandingPage />} />
         </Route>
       </Routes>
-      <BackToTopButton />
     </>
   );
 };
