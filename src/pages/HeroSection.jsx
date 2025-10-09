@@ -162,7 +162,7 @@ const HeroSection = () => {
       >
         <Mouse className="h-7 w-7 animate-pulse text-neutral-400 group-hover:text-neutral-700 dark:group-hover:text-neutral-200" />
         <span className="text-[10px] tracking-wider group-hover:text-neutral-800 dark:group-hover:text-neutral-200">
-          Scroll
+          Click
         </span>
       </button>
 

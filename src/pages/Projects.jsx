@@ -4,58 +4,44 @@ import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
-    id: "toundra",
-    name: "Toundra",
+    id: "marwar-saheli",
+    name: "Marwar Saheli",
     description:
-      "A fitness training platform with 6000+ paid users, built for real-time sessions and performance tracking.",
-    website: "#",
-    source: "#",
-    technologies: ["Figma", "React.js", "Tailwind CSS", "Express.js"],
+      "An ecommerce platform for selling authentic Rajasthani spices online.",
+    website: "https://marwarsaheli.com/",
+    technologies: [
+      "React.js",
+      "Figma",
+      "Tailwind CSS",
+      "Express.js",
+      "MongoDB",
+      "Razorpay",
+      "Node.js",
+    ],
   },
   {
-    id: "portfolio",
-    name: "Portfolio Site",
+    id: "zms",
+    name: "Zoo Managment System",
     description:
-      "My personal portfolio showcasing projects, skills, and a minimalist dark/light experience.",
-    website: "#",
-    source: "#",
-    technologies: ["Vite", "React", "Tailwind", "Vanta.js"],
+      "A full‑stack zoo management & ticketing platform Manage animals, admins, orders, messages & scheduled visits with role‑based access control.",
+    website: "https://zms.chaipecharcha.tech/",
+    source: "https://github.com/ankitXD/ZMS",
+    technologies: [
+      "React.js",
+      "Express.js",
+      "MongoDB",
+      "Node.js",
+      "Tailwind CSS",
+      "Heroku",
+    ],
   },
   {
-    id: "cms-lite",
-    name: "CMS Lite",
+    id: "newspaper-tracker-bot",
+    name: "Newspaper Tracker Bot",
     description:
-      "A lightweight content management interface for small teams needing quick edits and publishing.",
-    website: "#",
-    source: "#",
-    technologies: ["Node.js", "Express", "MongoDB", "Tailwind"],
-  },
-  {
-    id: "analytics-dashboard",
-    name: "Analytics Dashboard",
-    description:
-      "Modular dashboard for tracking product KPIs with pluggable widgets and role-based access.",
-    website: "#",
-    source: "#",
-    technologies: ["Next.js", "ShadCN", "PostgreSQL", "Prisma"],
-  },
-  {
-    id: "task-flow",
-    name: "Task Flow",
-    description:
-      "Kanban-inspired task management tool focusing on speed, keyboard shortcuts, and offline support.",
-    website: "#",
-    source: "#",
-    technologies: ["React", "Redux Toolkit", "IndexedDB", "Tailwind"],
-  },
-  {
-    id: "analytics-dashboard",
-    name: "Analytics Dashboard",
-    description:
-      "Modular dashboard for tracking product KPIs with pluggable widgets and role-based access.",
-    website: "#",
-    source: "#",
-    technologies: ["Next.js", "ShadCN", "PostgreSQL", "Prisma"],
+      "Lightweight Telegram bot that scrapes daily newspaper and returns the best link. Supports polling for local testing and webhook mode for production.",
+    website: "https://t.me/Ankitkeapnekaamkabot",
+    technologies: ["Node.js", "axios", "cheerio", "Heroku"],
   },
 ];
 

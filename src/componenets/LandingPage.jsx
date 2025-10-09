@@ -1,11 +1,8 @@
 import React from "react";
 import HeroSection from "../pages/HeroSection";
 import AboutMe from "../pages/AboutMe";
-import Projects from "../pages/Projects"
-import GetInTouch from "../pages/GetInTouch"
-import Skills from "../pages/Skills";
-import WorkExperience from "../pages/WorkExperience"
-import FreelanceServices from "../pages/FreelanceServices"
+import Projects from "../pages/Projects";
+import GetInTouch from "../pages/GetInTouch";
 
 const LandingPage = () => {
   return (
@@ -14,9 +11,6 @@ const LandingPage = () => {
       <Projects />
       <AboutMe />
       <GetInTouch />
-      {/* <Skills /> */}
-      {/* <WorkExperience /> */}
-      {/* <FreelanceServices /> */}
     </div>
   );
 };

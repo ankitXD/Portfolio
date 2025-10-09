@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import emailjs from "emailjs-com";
 
 const GetInTouch = () => {
   const [form, setForm] = useState({
@@ -9,16 +10,40 @@ const GetInTouch = () => {
     message: "",
   });
   const [status, setStatus] = useState(null);
+  const [sending, setSending] = useState(false);
+  const formRef = useRef(null);
 
   const onChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // Placeholder submit logic
-    setStatus("Message sent (demo).");
-    setForm({ name: "", email: "", subject: "", message: "" });
-    setTimeout(() => setStatus(null), 3000);
+    setSending(true);
+    setStatus(null);
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus("Email service not configured");
+      setSending(false);
+      return;
+    }
+
+    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey).then(
+      () => {
+        setStatus("Message sent, I'll contact you within a few hours.");
+        setForm({ name: "", email: "", subject: "", message: "" });
+        setSending(false);
+        setTimeout(() => setStatus(null), 4000);
+      },
+      (error) => {
+        console.error("EmailJS error", error);
+        setStatus("Failed to send message. Try again later.");
+        setSending(false);
+      }
+    );
   };
 
   return (
@@ -39,6 +64,7 @@ const GetInTouch = () => {
       <div className="grid gap-10 md:grid-cols-2">
         {/* Form */}
         <form
+          ref={formRef}
           onSubmit={onSubmit}
           className="relative rounded-lg border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-neutral-700 dark:bg-neutral-900/70"
           noValidate
@@ -122,8 +148,9 @@ const GetInTouch = () => {
               <button
                 type="submit"
                 className="inline-flex items-center rounded-lg bg-neutral-900 px-6 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-300"
+                disabled={sending}
               >
-                Send Message
+                {sending ? "Sending…" : "Send Message"}
               </button>
               {status && (
                 <span className="text-xs font-medium text-neutral-600 dark:text-neutral-300">
@@ -159,7 +186,7 @@ const GetInTouch = () => {
             <ul className="mt-3 flex gap-4" aria-label="Social Links">
               <li>
                 <a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/ankitXD"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-500 dark:hover:text-neutral-200 dark:focus-visible:ring-neutral-400"
@@ -170,22 +197,13 @@ const GetInTouch = () => {
               </li>
               <li>
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/ankit-gupta-s3v3nc3/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-500 dark:hover:text-neutral-200 dark:focus-visible:ring-neutral-400"
                   aria-label="LinkedIn"
                 >
                   <FaLinkedin />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:guptankit.2003@gmail.com"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-500 dark:hover:text-neutral-200 dark:focus-visible:ring-neutral-400"
-                  aria-label="Email"
-                >
-                  <FaEnvelope />
                 </a>
               </li>
             </ul>
@@ -198,7 +216,7 @@ const GetInTouch = () => {
             <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
               India
             </p>
-            <p className="mt-1 text-xs font-medium text-neutral-500 dark:text-neutral-400">
+            <p className="mt-2 text-xs font-medium text-neutral-500 dark:text-neutral-400">
               Available for remote work worldwide
             </p>
           </div>
