@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 
@@ -7,6 +8,7 @@ const navItems = [
   { id: "projects", label: "Projects" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
+  { id: "tools", label: "Tools" },
 ];
 
 const Navbar = () => {
@@ -117,13 +119,22 @@ const Navbar = () => {
           <ul className="hidden items-center gap-8 md:flex">
             {navItems.map((n) => (
               <li key={n.id}>
-                <a
-                  href={`#${n.id}`}
-                  onClick={(e) => scrollTo(e, n.id)}
-                  className="text-sm font-semibold tracking-wide text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
-                >
-                  {n.label}
-                </a>
+                {n.id === "tools" ? (
+                  <Link
+                    to="/tools"
+                    className="text-sm font-semibold tracking-wide text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+                  >
+                    {n.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={`#${n.id}`}
+                    onClick={(e) => scrollTo(e, n.id)}
+                    className="text-sm font-semibold tracking-wide text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+                  >
+                    {n.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -186,20 +197,34 @@ const Navbar = () => {
         <ul className="flex flex-col gap-4 mt-6">
           {navItems.map((n) => (
             <li key={n.id}>
-              <a
-                href={`#${n.id}`}
-                onClick={(e) => {
-                  scrollTo(e, n.id);
-                  setMenuOpen(false);
-                }}
-                className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
-                  menuReady
-                    ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
-                    : ""
-                }`}
-              >
-                {n.label}
-              </a>
+              {n.id === "tools" ? (
+                <Link
+                  to="/tools"
+                  onClick={() => setMenuOpen(false)}
+                  className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
+                    menuReady
+                      ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
+                      : ""
+                  }`}
+                >
+                  {n.label}
+                </Link>
+              ) : (
+                <a
+                  href={`#${n.id}`}
+                  onClick={(e) => {
+                    scrollTo(e, n.id);
+                    setMenuOpen(false);
+                  }}
+                  className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
+                    menuReady
+                      ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
+                      : ""
+                  }`}
+                >
+                  {n.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
