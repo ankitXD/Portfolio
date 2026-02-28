@@ -2,13 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 // Scrolls to top on route change (ignores in-page hash navigations)
-export function ScrollToTop() {
+function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
     if (hash) return; // allow anchor jumps
     const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
     window.scrollTo({
       top: 0,
@@ -21,7 +21,7 @@ export function ScrollToTop() {
 }
 
 // Floating button that appears after scrolling down
-export function BackToTopButton({ offset = 240 }) {
+function BackToTopButton({ offset = 240 }) {
   const [visible, setVisible] = useState(false);
   const containerRef = useRef(null);
   const vantaInstance = useRef(null);
@@ -35,7 +35,7 @@ export function BackToTopButton({ offset = 240 }) {
 
   const scrollTop = () => {
     const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
     window.scrollTo({
       top: 0,

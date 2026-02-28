@@ -126,14 +126,17 @@ const DataWaster = () => {
         </p>
 
         <div className="max-w-md mx-auto">
+          <label htmlFor="waste-amount" className="text-sm mb-2 block">
+            MB to waste (0 = infinite)
+          </label>
           <input
+            id="waste-amount"
             type="number"
             value={amount}
             onChange={(e) => setAmount(Number(e.target.value))}
-            className="w-full px-3 py-2 border rounded dark:bg-gray-800 mb-2"
+            className="w-full px-3 py-2 border rounded dark:bg-gray-800 mb-4"
             min="0"
           />
-          <p className="text-sm mb-4">MB to waste (0 = infinite)</p>
 
           <button
             onClick={startWasting}

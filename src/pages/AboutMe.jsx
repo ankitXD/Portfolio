@@ -86,8 +86,8 @@ const AboutMe = () => {
         {/* Left: experience card */}
         <Card heading={experience.title}>
           <ul className="space-y-5">
-            {experience.roles.map((r, idx) => (
-              <li key={idx} className="space-y-2">
+            {experience.roles.map((r) => (
+              <li key={r.role} className="space-y-2">
                 <div>
                   <p className="font-semibold text-neutral-800 dark:text-neutral-100">
                     {r.role}
@@ -97,8 +97,8 @@ const AboutMe = () => {
                   </p>
                 </div>
                 <ul className="ml-4 list-disc space-y-1 text-[12px] text-neutral-600 dark:text-neutral-400">
-                  {r.points.map((p, i) => (
-                    <li key={i}>{p}</li>
+                  {r.points.map((p) => (
+                    <li key={p}>{p}</li>
                   ))}
                 </ul>
               </li>

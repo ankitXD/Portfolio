@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -16,6 +16,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuReady, setMenuReady] = useState(false); // delays hover activation to avoid flash
+  const menuTimerRef = useRef(null);
 
   // Init theme
   useEffect(() => {
@@ -50,10 +51,10 @@ const Navbar = () => {
   // Close menu on escape key or resize >= md
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Escape") closeMenu();
     };
     const onResize = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
+      if (window.innerWidth >= 768) closeMenu();
     };
     window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
@@ -61,9 +62,7 @@ const Navbar = () => {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", onResize);
     };
-  }, []);
-
-  // Prevent body scroll when menu open
+  }, [closeMenu]);
   useEffect(() => {
     if (menuOpen) {
       const prev = document.body.style.overflow;
@@ -74,16 +73,23 @@ const Navbar = () => {
     }
   }, [menuOpen]);
 
-  // Delay enabling hover styles to prevent first item highlight on open (mobile quirk)
-  useEffect(() => {
-    if (menuOpen) {
-      setMenuReady(false);
-      const t = setTimeout(() => setMenuReady(true), 80); // small delay after animation
-      return () => clearTimeout(t);
-    } else {
-      setMenuReady(false);
-    }
-  }, [menuOpen]);
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    setMenuReady(false);
+    clearTimeout(menuTimerRef.current);
+  }, []);
+
+  const openMenu = useCallback(() => {
+    setMenuOpen(true);
+    setMenuReady(false);
+    clearTimeout(menuTimerRef.current);
+    menuTimerRef.current = setTimeout(() => setMenuReady(true), 80);
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    if (menuOpen) closeMenu();
+    else openMenu();
+  }, [menuOpen, closeMenu, openMenu]);
 
   const scrollTo = (e, id) => {
     e.preventDefault();
@@ -155,7 +161,7 @@ const Navbar = () => {
           {/* Hamburger button (mobile) */}
           <button
             type="button"
-            onClick={() => setMenuOpen((o) => !o)}
+            onClick={toggleMenu}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
@@ -174,8 +180,14 @@ const Navbar = () => {
         className={`fixed inset-0 z-30 bg-black/30 backdrop-blur-sm transition-opacity duration-200 md:hidden ${
           menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
-        onClick={() => setMenuOpen(false)}
+        role="button"
+        tabIndex={-1}
+        onClick={closeMenu}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") closeMenu();
+        }}
         aria-hidden={!menuOpen}
+        aria-label="Close menu"
       />
       {/* Mobile menu panel */}
       <div
@@ -189,7 +201,7 @@ const Navbar = () => {
         <button
           type="button"
           aria-label="Close menu"
-          onClick={() => setMenuOpen(false)}
+          onClick={closeMenu}
           className="absolute right-4 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
         >
           <FiX className="h-4 w-4" />
@@ -200,7 +212,7 @@ const Navbar = () => {
               {n.id === "tools" ? (
                 <Link
                   to="/tools"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={closeMenu}
                   className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
                     menuReady
                       ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
@@ -214,7 +226,7 @@ const Navbar = () => {
                   href={`#${n.id}`}
                   onClick={(e) => {
                     scrollTo(e, n.id);
-                    setMenuOpen(false);
+                    closeMenu();
                   }}
                   className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
                     menuReady
