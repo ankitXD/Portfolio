@@ -1,14 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./componenets/Layout";
-import LandingPage from "./componenets/LandingPage";
-import Tools from "./pages/Tools";
-import ScrollToTop from "./componenets/ScrollToTop";
-import DataWaster from "./pages/Tools/DataWaster";
-import PasswordGenerator from "./pages/Tools/PasswordGenerator";
-import BlackPage from "./pages/Tools/BlackPage";
-import SpeedTest from "./pages/Tools/SpeedTest";
-import URLShortner from "./pages/Tools/URLShortner";
+import Layout from "@/componenets/Layout";
+import LandingPage from "@/componenets/LandingPage";
+import Tools from "@/pages/Tools";
+import ScrollToTop from "@/componenets/ScrollToTop";
+import DataWaster from "@/pages/Tools/DataWaster";
+import PasswordGenerator from "@/pages/Tools/PasswordGenerator";
+import BlackPage from "@/pages/Tools/BlackPage";
+import SpeedTest from "@/pages/Tools/SpeedTest";
+import URLShortner from "@/pages/Tools/URLShortner";
 
 const App = () => {
   return (
