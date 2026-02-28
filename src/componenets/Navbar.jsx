@@ -48,6 +48,24 @@ const Navbar = () => {
     });
   };
 
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    setMenuReady(false);
+    clearTimeout(menuTimerRef.current);
+  }, []);
+
+  const openMenu = useCallback(() => {
+    setMenuOpen(true);
+    setMenuReady(false);
+    clearTimeout(menuTimerRef.current);
+    menuTimerRef.current = setTimeout(() => setMenuReady(true), 80);
+  }, []);
+
+  const toggleMenu = useCallback(() => {
+    if (menuOpen) closeMenu();
+    else openMenu();
+  }, [menuOpen, closeMenu, openMenu]);
+
   // Close menu on escape key or resize >= md
   useEffect(() => {
     const onKey = (e) => {
@@ -72,24 +90,6 @@ const Navbar = () => {
       };
     }
   }, [menuOpen]);
-
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false);
-    setMenuReady(false);
-    clearTimeout(menuTimerRef.current);
-  }, []);
-
-  const openMenu = useCallback(() => {
-    setMenuOpen(true);
-    setMenuReady(false);
-    clearTimeout(menuTimerRef.current);
-    menuTimerRef.current = setTimeout(() => setMenuReady(true), 80);
-  }, []);
-
-  const toggleMenu = useCallback(() => {
-    if (menuOpen) closeMenu();
-    else openMenu();
-  }, [menuOpen, closeMenu, openMenu]);
 
   const scrollTo = (e, id) => {
     e.preventDefault();
