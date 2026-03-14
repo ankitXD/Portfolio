@@ -9,6 +9,7 @@ import PasswordGenerator from "@/pages/Tools/PasswordGenerator";
 import BlackPage from "@/pages/Tools/BlackPage";
 import SpeedTest from "@/pages/Tools/SpeedTest";
 import URLShortner from "@/pages/Tools/URLShortner";
+import Custom404 from "@/componenets/Custom404";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/black-page" element={<BlackPage />} />
         <Route path="/speed-test" element={<SpeedTest />} />
         <Route path="/url-shortner" element={<URLShortner />} />
+        <Route path="*" element={<Custom404 />} />
       </Routes>
     </>
   );
