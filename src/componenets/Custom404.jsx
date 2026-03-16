@@ -50,14 +50,6 @@ const Custom404 = () => {
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
-
-          {/* Subtle info card */}
-          <div className="mt-8 w-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white/70 dark:bg-neutral-900/60 backdrop-blur-sm p-6 transition-colors duration-300">
-            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-              <span className="font-semibold">Error Code:</span> 404 • Page Not
-              Found
-            </p>
-          </div>
         </div>
       </div>
     </div>

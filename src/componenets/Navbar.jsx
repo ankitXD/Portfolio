@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 
@@ -8,7 +8,8 @@ const navItems = [
   { id: "projects", label: "Projects" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
-  { id: "tools", label: "Tools" },
+  { id: "services", label: "Services" },
+  // { id: "tools", label: "Tools" },
 ];
 
 const Navbar = () => {
@@ -17,6 +18,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuReady, setMenuReady] = useState(false); // delays hover activation to avoid flash
   const menuTimerRef = useRef(null);
+  const navigate = useNavigate();
 
   // Init theme
   useEffect(() => {
@@ -94,7 +96,12 @@ const Navbar = () => {
   const scrollTo = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Element doesn't exist on current page, navigate to home
+      navigate("/#" + id);
+    }
   };
 
   // Maintain constant height & persistent (initially transparent) border to avoid flash
@@ -125,9 +132,9 @@ const Navbar = () => {
           <ul className="hidden items-center gap-8 md:flex">
             {navItems.map((n) => (
               <li key={n.id}>
-                {n.id === "tools" ? (
+                {n.id === "tools" || n.id === "services" ? (
                   <Link
-                    to="/tools"
+                    to={`/${n.id}`}
                     className="text-sm font-semibold tracking-wide text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
                   >
                     {n.label}
@@ -209,9 +216,9 @@ const Navbar = () => {
         <ul className="flex flex-col gap-4 mt-6">
           {navItems.map((n) => (
             <li key={n.id}>
-              {n.id === "tools" ? (
+              {n.id === "tools" || n.id === "services" ? (
                 <Link
-                  to="/tools"
+                  to={`/${n.id}`}
                   onClick={closeMenu}
                   className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
                     menuReady

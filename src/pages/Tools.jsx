@@ -74,21 +74,21 @@ const Tools = () => {
       description:
         "The fastest and most efficient way to waste your internet data.",
       icon: Download,
-      path: "/data-waster",
+      path: "/tools/data-waster",
     },
     {
       id: 2,
       title: "Password Generator",
       description: "Create strong, secure, and random passwords with ease.",
       icon: Lock,
-      path: "/password-generator",
+      path: "/tools/password-generator",
     },
     {
       id: 3,
       title: "Black Page",
       description: "A minimalist, distraction-free page for focus.",
       icon: Moon,
-      path: "/black-page",
+      path: "/tools/black-page",
     },
     {
       id: 4,
@@ -96,14 +96,14 @@ const Tools = () => {
       description:
         "Check your internet connection speed quickly and accurately.",
       icon: Gauge,
-      path: "/speed-test",
+      path: "/tools/speed-test",
     },
     {
       id: 5,
       title: "URL Shortener",
       description: "Shorten long URLs into manageable and shareable links.",
       icon: LinkIcon,
-      path: "/url-shortner",
+      path: "/tools/url-shortner",
     },
   ];
 
