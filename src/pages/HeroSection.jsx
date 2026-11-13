@@ -32,7 +32,6 @@ const Lanyard = () => {
     running: false,
   });
   const [grabbing, setGrabbing] = useState(false);
-  const [touched, setTouched] = useState(false);
 
   const paint = () => {
     const s = sim.current;
@@ -109,7 +108,6 @@ const Lanyard = () => {
     s.pivotY = rect.top + window.innerHeight * 0.04;
     s.target = s.angle;
     setGrabbing(true);
-    setTouched(true);
     start();
   };
 
@@ -192,24 +190,13 @@ const Lanyard = () => {
                   Previously
                 </p>
                 <div className="mt-[6px] flex flex-wrap gap-1">
-                  <Pill>QWORK</Pill>
-                  <Pill>Marwar Saheli</Pill>
+                  <Pill>Viral Works Tech</Pill>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <p
-        aria-hidden="true"
-        className={
-          "mt-3 font-sans text-[9px] uppercase tracking-[0.18em] text-ink/30 transition-opacity duration-500 " +
-          (touched ? "opacity-0" : "opacity-100")
-        }
-      >
-        drag it
-      </p>
     </div>
   );
 };
@@ -258,10 +245,9 @@ const HeroSection = () => (
 
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 select-none text-center"
-      style={{ transform: "translateY(9%)" }}
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-0 select-none pb-[4vw] text-center"
     >
-      <span className="block whitespace-nowrap font-serif text-[clamp(4.5rem,22vw,19rem)] leading-[0.74] tracking-[-0.035em] text-ink">
+      <span className="block whitespace-nowrap font-serif text-[26vw] leading-[0.78] tracking-[-0.035em] text-ink">
         Ankit Gupta
       </span>
     </div>
