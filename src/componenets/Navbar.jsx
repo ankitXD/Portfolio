@@ -1,245 +1,139 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSun, FaMoon } from "react-icons/fa";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const navItems = [
-  { id: "home", label: "Home" },
-  { id: "projects", label: "Projects" },
+  { id: "projects", label: "Work" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
   { id: "services", label: "Services" },
-  // { id: "tools", label: "Tools" },
 ];
 
 const Navbar = () => {
-  const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuReady, setMenuReady] = useState(false); // delays hover activation to avoid flash
-  const menuTimerRef = useRef(null);
   const navigate = useNavigate();
 
-  // Init theme
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initial = stored || (prefers ? "dark" : "light");
-    if (initial === "dark") {
-      document.documentElement.classList.add("dark");
-      setDark(true);
-    }
-  }, []);
-
-  // Scroll listener
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 8);
-    };
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setDark((d) => {
-      const next = !d;
-      document.documentElement.classList.toggle("dark", next);
-      localStorage.setItem("theme", next ? "dark" : "light");
-      return next;
-    });
-  };
-
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false);
-    setMenuReady(false);
-    clearTimeout(menuTimerRef.current);
-  }, []);
-
-  const openMenu = useCallback(() => {
-    setMenuOpen(true);
-    setMenuReady(false);
-    clearTimeout(menuTimerRef.current);
-    menuTimerRef.current = setTimeout(() => setMenuReady(true), 80);
-  }, []);
-
-  const toggleMenu = useCallback(() => {
-    if (menuOpen) closeMenu();
-    else openMenu();
-  }, [menuOpen, closeMenu, openMenu]);
-
-  // Close menu on escape key or resize >= md
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") closeMenu();
-    };
-    const onResize = () => {
-      if (window.innerWidth >= 768) closeMenu();
-    };
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+    const onResize = () => window.innerWidth >= 768 && setMenuOpen(false);
     window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", onResize);
     };
-  }, [closeMenu]);
-  useEffect(() => {
-    if (menuOpen) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [menuOpen]);
+  }, []);
 
-  const scrollTo = (e, id) => {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // Element doesn't exist on current page, navigate to home
-      navigate("/#" + id);
-    }
-  };
-
-  // Maintain constant height & persistent (initially transparent) border to avoid flash
-  const navClass =
-    "fixed inset-x-0 top-0 z-40 flex items-center h-20 border-b transition-colors duration-300 " +
-    (scrolled
-      ? "border-neutral-200/70 bg-white/80 backdrop-blur-md shadow-sm dark:border-neutral-700/60 dark:bg-neutral-900/70"
-      : "border-transparent bg-transparent dark:border-transparent");
+  const scrollTo = useCallback(
+    (e, id) => {
+      e.preventDefault();
+      setMenuOpen(false);
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+      else navigate("/#" + id);
+    },
+    [navigate]
+  );
 
   return (
-    <nav className={navClass}>
-      <div className="mx-auto flex h-full w-full max-w-7xl items-center justify-between px-6">
-        {/* Brand */}
+    <nav
+      className={
+        "fixed inset-x-0 top-0 z-40 transition-colors duration-300 " +
+        (scrolled || menuOpen
+          ? "border-b border-line bg-paper/85 backdrop-blur-md"
+          : "border-b border-transparent")
+      }
+    >
+      <div className="mx-auto flex h-16 max-w-page items-center justify-between px-6 sm:px-10">
         <a
           href="#home"
           onClick={(e) => scrollTo(e, "home")}
-          className="text-lg tracking-tight text-neutral-900 hover:text-neutral-700 dark:text-neutral-100 dark:hover:text-neutral-300"
-          style={{
-            fontFamily: `SUSE Mono, sans-serif`,
-          }}
+          className="font-serif text-[17px] tracking-[-0.01em] text-ink"
         >
           Ankit Gupta
         </a>
 
-        {/* Nav + Toggle */}
-        <div className="flex items-center gap-4 md:gap-8">
-          {/* Desktop nav */}
-          <ul className="hidden items-center gap-8 md:flex">
-            {navItems.map((n) => (
-              <li key={n.id}>
-                {n.id === "tools" || n.id === "services" ? (
+        <div className="flex items-center gap-1">
+          <ul className="hidden items-center gap-6 md:flex">
+            {navItems.map((n) =>
+              n.id === "services" ? (
+                <li key={n.id}>
                   <Link
-                    to={`/${n.id}`}
-                    className="text-sm font-semibold tracking-wide text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+                    to="/services"
+                    className="font-serif text-[15px] text-ink/70 transition-colors hover:text-ink"
                   >
                     {n.label}
                   </Link>
-                ) : (
+                </li>
+              ) : (
+                <li key={n.id}>
                   <a
                     href={`#${n.id}`}
                     onClick={(e) => scrollTo(e, n.id)}
-                    className="text-sm font-semibold tracking-wide text-neutral-700 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+                    className="font-serif text-[15px] text-ink/70 transition-colors hover:text-ink"
                   >
                     {n.label}
                   </a>
-                )}
-              </li>
-            ))}
-          </ul>
-          {/* Theme toggle */}
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle dark mode"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
-          >
-            {dark ? (
-              <FaSun className="text-[15px]" />
-            ) : (
-              <FaMoon className="text-[15px]" />
+                </li>
+              )
             )}
-          </button>
+          </ul>
 
-          {/* Hamburger button (mobile) */}
+          <a
+            href="https://drive.google.com/file/d/1fTDuxTq3lgcFIX7T58PRbLYbwA6A4N4r/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-4 hidden font-serif text-[15px] text-ink/70 transition-colors hover:text-ink sm:inline-block"
+          >
+            <span className="link-underline">Résumé</span>
+          </a>
+
           <button
             type="button"
-            onClick={toggleMenu}
+            onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none md:hidden dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
+            className="ml-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink md:hidden"
           >
-            {menuOpen ? (
-              <FiX className="h-5 w-5" />
-            ) : (
-              <FiMenu className="h-5 w-5" />
-            )}
+            {menuOpen ? <FiX className="h-5 w-5" /> : <FiMenu className="h-5 w-5" />}
           </button>
         </div>
       </div>
-      {/* Mobile overlay */}
-      <div
-        className={`fixed inset-0 z-30 bg-black/30 backdrop-blur-sm transition-opacity duration-200 md:hidden ${
-          menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-        role="button"
-        tabIndex={-1}
-        onClick={closeMenu}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") closeMenu();
-        }}
-        aria-hidden={!menuOpen}
-        aria-label="Close menu"
-      />
-      {/* Mobile menu panel */}
+
       <div
         id="mobile-nav"
-        className={`md:hidden fixed top-20 inset-x-0 z-40 origin-top px-6 pb-10 pt-4 shadow-sm transition-all duration-200 ${
-          menuOpen
-            ? "scale-100 opacity-100"
-            : "pointer-events-none scale-95 opacity-0"
-        } border-b border-neutral-200 bg-white/90 backdrop-blur dark:border-neutral-700 dark:bg-neutral-900/90`}
+        className={
+          "fixed inset-x-0 top-16 border-b border-line bg-paper transition-all duration-200 md:hidden " +
+          (menuOpen
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-1 opacity-0")
+        }
       >
-        <button
-          type="button"
-          aria-label="Close menu"
-          onClick={closeMenu}
-          className="absolute right-4 top-3 inline-flex h-8 w-8 items-center justify-center rounded-md bg-white/40 text-neutral-700 transition-colors hover:bg-white/60 active:bg-white/70 focus:outline-none dark:bg-neutral-800/40 dark:text-neutral-300 dark:hover:bg-neutral-700/50 dark:active:bg-neutral-700/60"
-        >
-          <FiX className="h-4 w-4" />
-        </button>
-        <ul className="flex flex-col gap-4 mt-6">
+        <ul className="flex flex-col px-6 py-2">
           {navItems.map((n) => (
             <li key={n.id}>
-              {n.id === "tools" || n.id === "services" ? (
+              {n.id === "services" ? (
                 <Link
-                  to={`/${n.id}`}
-                  onClick={closeMenu}
-                  className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
-                    menuReady
-                      ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
-                      : ""
-                  }`}
+                  to="/services"
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-3 font-serif text-[20px] text-ink"
                 >
                   {n.label}
                 </Link>
               ) : (
                 <a
                   href={`#${n.id}`}
-                  onClick={(e) => {
-                    scrollTo(e, n.id);
-                    closeMenu();
-                  }}
-                  className={`block rounded-lg px-2 py-2 text-sm font-semibold tracking-wide text-neutral-800 transition-colors dark:text-neutral-200 ${
-                    menuReady
-                      ? "hover:bg-neutral-200/60 hover:text-neutral-900 dark:hover:bg-neutral-700/60 dark:hover:text-white"
-                      : ""
-                  }`}
+                  onClick={(e) => scrollTo(e, n.id)}
+                  className="block py-3 font-serif text-[20px] text-ink"
                 >
                   {n.label}
                 </a>

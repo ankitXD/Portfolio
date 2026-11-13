@@ -4,15 +4,42 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Base theming: apply background/text colors that react to .dark on <html> */
 body {
-  @apply bg-white text-neutral-900 transition-colors duration-300 ease-out dark:bg-neutral-950 dark:text-neutral-100;
+  @apply bg-paper text-ink antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Optional utility for sections to get subtle divider color in both modes */
-.border-theme {
-  @apply border-neutral-200 dark:border-neutral-800;
+::selection {
+  background: #1d1cff;
+  color: #fcfcfc;
 }
 
+:focus-visible {
+  outline: 1px solid #1d1cff;
+  outline-offset: 3px;
+}
+
+@layer utilities {
+  .rule {
+    @apply border-line;
+  }
+  .label {
+    @apply font-sans text-[11px] uppercase tracking-[0.18em] text-mute;
+  }
+  .link-underline {
+    @apply underline decoration-line decoration-1 underline-offset-[3px] transition-colors hover:decoration-cobalt;
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-1.6deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
+}

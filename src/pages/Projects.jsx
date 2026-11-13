@@ -1,124 +1,100 @@
 import React from "react";
-import { FiGlobe } from "react-icons/fi";
-import { FaGithub } from "react-icons/fa";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const projects = [
   {
     id: "marwar-saheli",
     name: "Marwar Saheli",
-    description:
-      "An ecommerce platform for selling authentic Rajasthani spices online.",
+    blurb:
+      "Storefront and checkout for a Rajasthani spice label. Product pages, cart, and Razorpay payments.",
     website: "https://marwarsaheli.com/",
-    technologies: [
-      "React.js",
-      "Figma",
-      "Tailwind CSS",
-      "Express.js",
-      "MongoDB",
-      "Razorpay",
-      "Node.js",
-    ],
+    stack: "React · Tailwind · Express · MongoDB",
+    year: "2025",
   },
   {
     id: "zms",
-    name: "Zoo Managment System",
-    description:
-      "A full‑stack zoo management & ticketing platform Manage animals, admins, orders, messages & scheduled visits with role‑based access control.",
-    website: "https://zms.chaipecharcha.tech/",
+    name: "Zoo Management System",
+    blurb:
+      "Ticketing and operations for a zoo. Animals, admins, orders and scheduled visits behind role-based access.",
     source: "https://github.com/ankitXD/ZMS",
-    technologies: [
-      "React.js",
-      "Express.js",
-      "MongoDB",
-      "Node.js",
-      "Tailwind CSS",
-      "Heroku",
-    ],
+    stack: "React · Express · MongoDB",
+    year: "2025",
   },
   {
     id: "newspaper-tracker-bot",
-    name: "Newspaper Tracker Bot",
-    description:
-      "Lightweight Telegram bot that scrapes daily newspaper and returns the best link. Supports polling for local testing and webhook mode for production.",
+    name: "Newspaper Tracker",
+    blurb:
+      "Telegram bot that scrapes the daily paper and returns the best link. Polling locally, webhook in production.",
     website: "https://t.me/Ankitkeapnekaamkabot",
-    technologies: ["Node.js", "axios", "cheerio", "Heroku"],
+    stack: "Node · axios · cheerio",
+    year: "2025",
   },
 ];
 
-const ProjectCard = ({ project }) => (
-  <article className="group relative flex h-full flex-col rounded-lg border border-neutral-200 bg-white p-5 shadow-sm transition-colors hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-600">
-    <div className="mb-4">
-      <h3 className="text-xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-50 line-clamp-1">
-        {project.name}
-      </h3>
-    </div>
-    <p className="mb-4 line-clamp-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-      {project.description}
-    </p>
-    <div className="mt-auto flex flex-col gap-4">
-      <ul className="flex flex-wrap gap-2">
-        {project.technologies.map((t) => (
-          <li
-            key={t}
-            className="rounded-lg border border-neutral-300 bg-neutral-100 px-2 py-1 text-[10px] font-medium text-neutral-700 transition-colors duration-150 hover:border-neutral-400 hover:bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:bg-neutral-700 cursor-pointer"
-          >
-            {t}
-          </li>
-        ))}
-      </ul>
-      <div className="flex items-center gap-3 text-[11px] font-medium">
-        {project.website && (
-          <a
-            href={project.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit website for ${project.name}`}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
-          >
-            <FiGlobe className="h-3.5 w-3.5" />
-            <span className="tracking-tight">Website</span>
-          </a>
-        )}
-        {project.source && (
-          <a
-            href={project.source}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`View source code for ${project.name}`}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-neutral-300 bg-neutral-100 px-2.5 py-1.5 text-neutral-700 transition-colors hover:bg-neutral-200 hover:text-neutral-900 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-white"
-          >
-            <FaGithub className="h-3.5 w-3.5" />
-            <span className="tracking-tight">Source</span>
-          </a>
-        )}
-      </div>
-    </div>
-  </article>
-);
-
-const Projects = () => {
-  return (
-    <section
-      id="projects"
-      className="mx-auto max-w-5xl px-6 py-16 scroll-mt-20"
-      aria-label="Projects"
-    >
-      <div className="mb-12 text-center">
-        <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
-          Projects
-        </h3>
-        <h2 className="text-3xl sm:text-4xl tracking-tight text-neutral-900 dark:text-neutral-50">
-          Proof of Work
+const Projects = () => (
+  <section id="projects" aria-label="Work" className="scroll-mt-16 bg-paper">
+    <div className="mx-auto max-w-page px-6 py-20 sm:px-10 sm:py-24">
+      <div className="flex items-baseline justify-between gap-6">
+        <h2 className="font-serif text-[clamp(2rem,4vw,3rem)] leading-none tracking-[-0.02em]">
+          Selected work
         </h2>
+        <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
+          Three projects
+        </span>
       </div>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p) => (
-          <ProjectCard key={p.id} project={p} />
+      <div className="mt-10 border-t border-line">
+        {projects.map((p, i) => (
+          <article
+            key={p.id}
+            className="group grid grid-cols-1 items-baseline gap-x-8 gap-y-3 border-b border-line py-7 transition-colors duration-300 hover:bg-ink/[0.015] sm:grid-cols-[36px_minmax(0,1.1fr)_minmax(0,1.35fr)_auto]"
+          >
+            <span className="font-sans text-[11px] tabular-nums text-mute">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+
+            <h3 className="font-serif text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.05] tracking-[-0.015em] transition-colors duration-300 group-hover:text-cobalt">
+              {p.name}
+            </h3>
+
+            <div>
+              <p className="max-w-[52ch] font-serif text-[15px] leading-[1.45] text-ink/70">
+                {p.blurb}
+              </p>
+              <p className="mt-2 font-sans text-[11px] tracking-[0.04em] text-mute">
+                {p.stack}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-4 sm:justify-end">
+              {p.website && (
+                <a
+                  href={p.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-serif text-[14px] text-ink/80 transition-colors hover:text-ink"
+                >
+                  <span className="link-underline">Live</span>
+                  <FiArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              )}
+              {p.source && (
+                <a
+                  href={p.source}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-serif text-[14px] text-ink/80 transition-colors hover:text-ink"
+                >
+                  <span className="link-underline">Source</span>
+                  <FiArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              )}
+            </div>
+          </article>
         ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Projects;

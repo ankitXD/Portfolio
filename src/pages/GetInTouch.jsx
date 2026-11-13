@@ -1,6 +1,12 @@
 import React, { useState, useRef } from "react";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import emailjs from "emailjs-com";
+
+const fieldClass =
+  "w-full border-b border-line bg-transparent py-2 font-serif text-[15px] text-ink placeholder-ink/35 outline-none transition-colors focus:border-ink";
+
+const labelClass =
+  "block font-sans text-[10px] uppercase tracking-[0.18em] text-mute";
 
 const GetInTouch = () => {
   const [form, setForm] = useState({
@@ -33,193 +39,159 @@ const GetInTouch = () => {
 
     emailjs.sendForm(serviceId, templateId, formRef.current, publicKey).then(
       () => {
-        setStatus("Message sent, I'll contact you within a few hours.");
+        setStatus("Message sent. I'll reply within a few hours.");
         setForm({ name: "", email: "", subject: "", message: "" });
         setSending(false);
-        setTimeout(() => setStatus(null), 4000);
+        setTimeout(() => setStatus(null), 5000);
       },
       (error) => {
         console.error("EmailJS error", error);
-        setStatus("Failed to send message. Try again later.");
+        setStatus("Failed to send. Try again, or email me directly.");
         setSending(false);
       }
     );
   };
 
   return (
-    <section
-      className="mx-auto max-w-6xl px-6 py-16 scroll-mt-20"
-      aria-label="Get In Touch"
-      id="contact"
-    >
-      <header className="mb-10 text-center">
-        <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
-          Contact
-        </h3>
-        <h2 className="text-3xl sm:text-4xl  tracking-tight text-neutral-900 dark:text-neutral-50">
-          Let's Connect
-        </h2>
-      </header>
-
-      <div className="grid gap-10 md:grid-cols-2">
-        {/* Form */}
-        <form
-          ref={formRef}
-          onSubmit={onSubmit}
-          className="relative rounded-lg border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-neutral-700 dark:bg-neutral-900/70"
-          noValidate
-        >
-          <div className="grid gap-5">
-            <div>
-              <label
-                htmlFor="name"
-                className="mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-400"
-              >
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                required
-                value={form.name}
-                onChange={onChange}
-                placeholder="Your name"
-                className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-800 placeholder-neutral-400 outline-none transition focus:border-neutral-500 focus:ring-2 focus:ring-neutral-400/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:placeholder-neutral-500 dark:focus:border-neutral-400"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-400"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={onChange}
-                placeholder="you@example.com"
-                className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-800 placeholder-neutral-400 outline-none transition focus:border-neutral-500 focus:ring-2 focus:ring-neutral-400/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:placeholder-neutral-500 dark:focus:border-neutral-400"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="subject"
-                className="mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-400"
-              >
-                Subject
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                required
-                value={form.subject}
-                onChange={onChange}
-                placeholder="Project / Opportunity"
-                className="w-full rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-800 placeholder-neutral-400 outline-none transition focus:border-neutral-500 focus:ring-2 focus:ring-neutral-400/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:placeholder-neutral-500 dark:focus:border-neutral-400"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="message"
-                className="mb-1 block text-xs font-semibold uppercase tracking-wide text-neutral-600 dark:text-neutral-400"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                value={form.message}
-                onChange={onChange}
-                placeholder="Tell me a bit about what you need..."
-                className="w-full resize-y rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-800 placeholder-neutral-400 outline-none transition focus:border-neutral-500 focus:ring-2 focus:ring-neutral-400/40 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200 dark:placeholder-neutral-500 dark:focus:border-neutral-400"
-              />
-            </div>
-
-            <div className="flex items-center gap-3">
-              <button
-                type="submit"
-                className="inline-flex items-center rounded-lg bg-neutral-900 px-6 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-300"
-                disabled={sending}
-              >
-                {sending ? "Sending…" : "Send Message"}
-              </button>
-              {status && (
-                <span className="text-xs font-medium text-neutral-600 dark:text-neutral-300">
-                  {status}
-                </span>
-              )}
-            </div>
-          </div>
-        </form>
-
-        {/* Contact Info */}
-        <div className="space-y-8 rounded-lg border border-neutral-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-neutral-700 dark:bg-neutral-900/70">
+    <section id="contact" aria-label="Contact" className="scroll-mt-16 bg-paper">
+      <div className="mx-auto max-w-page px-6 pb-24 sm:px-10">
+        <div className="grid gap-10 border-t border-line pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-              Contact Information
-            </h3>
-            <ul className="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-              <li>
+            <h2 className="max-w-[14ch] font-serif text-[clamp(2rem,4vw,3rem)] leading-[0.98] tracking-[-0.02em]">
+              Have something worth building?
+            </h2>
+
+            <div className="mt-8 space-y-5">
+              <div>
+                <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
+                  Email
+                </p>
                 <a
                   href="mailto:guptankit.2003@gmail.com"
-                  className="text-neutral-700 underline-offset-4 hover:underline dark:text-neutral-300 dark:hover:text-neutral-100"
+                  className="mt-1 inline-block font-serif text-[17px] text-ink link-underline"
                 >
                   guptankit.2003@gmail.com
                 </a>
-              </li>
-            </ul>
+              </div>
+
+              <div>
+                <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
+                  Elsewhere
+                </p>
+                <div className="mt-1.5 flex gap-4">
+                  <a
+                    href="https://github.com/ankitxD"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="text-ink/60 transition-colors hover:text-ink"
+                  >
+                    <FaGithub className="h-[17px] w-[17px]" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/ankit-gupta-s3v3nc3/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="text-ink/60 transition-colors hover:text-ink"
+                  >
+                    <FaLinkedin className="h-[17px] w-[17px]" />
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
+                  Location
+                </p>
+                <p className="mt-1 font-serif text-[15px] text-ink/70">
+                  Delhi, India — working remotely worldwide
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-              Social Media
-            </h3>
-            <ul className="mt-3 flex gap-4" aria-label="Social Links">
-              <li>
-                <a
-                  href="https://github.com/ankitXD"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-500 dark:hover:text-neutral-200 dark:focus-visible:ring-neutral-400"
-                  aria-label="GitHub"
-                >
-                  <FaGithub />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/ankit-gupta-s3v3nc3/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-neutral-200 text-neutral-600 transition-colors hover:border-neutral-400 hover:text-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-500 dark:border-neutral-700 dark:text-neutral-400 dark:hover:border-neutral-500 dark:hover:text-neutral-200 dark:focus-visible:ring-neutral-400"
-                  aria-label="LinkedIn"
-                >
-                  <FaLinkedin />
-                </a>
-              </li>
-            </ul>
-          </div>
+          <form ref={formRef} onSubmit={onSubmit} noValidate>
+            <div className="grid gap-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="name" className={labelClass}>
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    required
+                    value={form.name}
+                    onChange={onChange}
+                    placeholder="Your name"
+                    className={fieldClass}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className={labelClass}>
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={onChange}
+                    placeholder="you@example.com"
+                    className={fieldClass}
+                  />
+                </div>
+              </div>
 
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-              Location
-            </h3>
-            <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
-              India
-            </p>
-            <p className="mt-2 text-xs font-medium text-neutral-500 dark:text-neutral-400">
-              Available for remote work worldwide
-            </p>
-          </div>
+              <div>
+                <label htmlFor="subject" className={labelClass}>
+                  Subject
+                </label>
+                <input
+                  id="subject"
+                  name="subject"
+                  required
+                  value={form.subject}
+                  onChange={onChange}
+                  placeholder="Project or role"
+                  className={fieldClass}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className={labelClass}>
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={4}
+                  value={form.message}
+                  onChange={onChange}
+                  placeholder="A few lines is plenty."
+                  className={`${fieldClass} resize-y`}
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-1">
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="inline-flex items-center rounded-full bg-ink px-6 py-2.5 font-sans text-[12px] uppercase tracking-[0.12em] text-paper transition-opacity hover:opacity-85 disabled:opacity-50"
+                >
+                  {sending ? "Sending…" : "Send"}
+                </button>
+                {status && (
+                  <span role="status" className="font-serif text-[13px] text-ink/60">
+                    {status}
+                  </span>
+                )}
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </section>

@@ -1,116 +1,91 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { FiArrowUpRight } from "react-icons/fi";
 import { servicesData } from "@/data/services";
 
-const ServiceCard = ({ service }) => {
+const ServiceRow = ({ service, index }) => {
   const navigate = useNavigate();
 
   return (
-    <article
+    <button
+      type="button"
       onClick={() => navigate(`/services/${service.slug}`)}
-      className="group relative flex h-full flex-col rounded-xl border border-neutral-200/50 bg-gradient-to-br from-white/80 to-white/60 p-6 shadow-sm transition-all duration-300 hover:border-neutral-300 hover:shadow-lg hover:-translate-y-1 dark:border-neutral-700/50 dark:bg-gradient-to-br dark:from-neutral-900/80 dark:to-neutral-900/60 dark:hover:border-neutral-600 cursor-pointer overflow-hidden"
+      className="group grid w-full grid-cols-[32px_minmax(0,1fr)] items-baseline gap-x-6 border-b border-line py-6 text-left transition-colors duration-300 hover:bg-ink/[0.015] sm:grid-cols-[36px_minmax(0,1.1fr)_minmax(0,1.4fr)_auto] sm:gap-x-8"
     >
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50/50 to-transparent dark:from-neutral-800/20 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <span className="font-sans text-[11px] tabular-nums text-mute">
+        {String(index + 1).padStart(2, "0")}
+      </span>
 
-      <div className="relative z-10">
-        <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-3 group-hover:text-neutral-700 dark:group-hover:text-neutral-100 transition-colors duration-300">
-          {service.title}
-        </h3>
-        <p className="text-sm text-neutral-600 dark:text-neutral-400 flex-1 leading-relaxed mb-4">
-          {service.description}
-        </p>
+      <h3 className="font-serif text-[clamp(1.35rem,2.1vw,1.75rem)] leading-[1.1] tracking-[-0.01em] transition-colors duration-300 group-hover:text-cobalt">
+        {service.title}
+      </h3>
 
-        {/* Arrow with animation */}
-        <div className="mt-auto flex items-center justify-between pt-2">
-          <span className="text-xs font-medium text-neutral-500 dark:text-neutral-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Learn more
-          </span>
-          <div className="flex items-center justify-center w-8 h-8 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-400 group-hover:bg-neutral-900 dark:group-hover:bg-neutral-100 group-hover:text-white dark:group-hover:text-neutral-900 transition-all duration-300 group-hover:translate-x-1">
-            <ArrowRight className="w-4 h-4" />
+      <p className="col-start-2 mt-2 max-w-[54ch] font-serif text-[15px] leading-[1.45] text-ink/70 sm:col-start-auto sm:mt-0">
+        {service.description}
+      </p>
+
+      <span className="col-start-2 mt-3 inline-flex items-center gap-1 font-serif text-[14px] text-ink/60 transition-colors group-hover:text-ink sm:col-start-auto sm:mt-0 sm:justify-self-end">
+        Read
+        <FiArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      </span>
+    </button>
+  );
+};
+
+const Services = () => (
+  <section
+    id="services"
+    className="scroll-mt-16 bg-paper"
+    aria-label="Services"
+  >
+    <div className="mx-auto max-w-page px-6 pb-20 pt-28 sm:px-10 sm:pb-24">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16">
+        <div>
+          <h1 className="max-w-[22ch] font-serif text-[clamp(2rem,4.4vw,3.25rem)] leading-[0.98] tracking-[-0.02em]">
+            End-to-end web development, from first screen to production.
+          </h1>
+          <p className="mt-5 max-w-[50ch] font-serif text-[16px] leading-[1.5] text-ink/70">
+            Landing pages and marketing sites through to SaaS platforms, APIs
+            and AI integrations.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-5">
+            <a
+              href="https://cal.com/ankit-gupta/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-2.5 font-sans text-[12px] uppercase tracking-[0.12em] text-paper transition-opacity hover:opacity-85"
+            >
+              Book a call
+              <FiArrowUpRight className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href="mailto:guptankit.2003@gmail.com"
+              className="font-serif text-[15px] text-ink/70 link-underline"
+            >
+              or email me
+            </a>
           </div>
         </div>
-      </div>
-    </article>
-  );
-};
 
-const Services = () => {
-  return (
-    <section
-      className="mx-auto max-w-6xl px-6 py-16 scroll-mt-20 mt-10"
-      id="services"
-    >
-      {/* Header */}
-      <header className="mb-12 text-center">
-        <h1 className="mb-4 text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-          Services
-        </h1>
-        <p className="mb-8 text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-          End-to-end web development, from landing pages and marketing sites to
-          complex SaaS platforms, APIs, and AI integrations.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="https://cal.com/ankit-gupta/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-neutral-900 text-white rounded-lg font-medium hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200 transition-colors inline-flex items-center gap-2"
-          >
-            Book a free call
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <a
-            href="mailto:guptankit.2003@gmail.com"
-            className="px-6 py-3 border border-neutral-300 text-neutral-900 rounded-lg font-medium hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-100 dark:hover:bg-neutral-900 transition-colors"
-          >
-            Email me
-          </a>
-        </div>
-      </header>
-
-      {/* Services Grid */}
-      <div className="mb-16">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {servicesData.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
-          ))}
+        <div className="self-end">
+          <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
+            What I take on
+          </p>
+          <p className="mt-2 max-w-[44ch] font-serif text-[16px] leading-[1.5] text-ink/70">
+            Most engagements are a few weeks long, scoped around one product
+            surface: a storefront, a dashboard, an API. Fixed scope, fixed price.
+          </p>
         </div>
       </div>
 
-      {/* CTA Footer */}
-      <div className="rounded-lg border border-neutral-200 bg-white/70 p-12 text-center shadow-sm backdrop-blur-sm dark:border-neutral-700 dark:bg-neutral-900/70">
-        <h2 className="mb-4 text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
-          Let's build something great
-        </h2>
-        <p className="mb-8 text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
-          Whether you have a detailed spec or just a rough idea, I can help turn
-          it into a polished, production-ready product.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="https://cal.com/ankit-gupta/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-neutral-900 text-white rounded-lg font-medium hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200 transition-colors inline-flex items-center gap-2"
-          >
-            Schedule a free call
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <a
-            href="mailto:guptankit.2003@gmail.com"
-            className="px-6 py-3 border border-neutral-300 text-neutral-900 rounded-lg font-medium hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-100 dark:hover:bg-neutral-900 transition-colors"
-          >
-            Email me
-          </a>
-        </div>
+      <div className="mt-14 border-t border-line">
+        {servicesData.map((service, i) => (
+          <ServiceRow key={service.slug} service={service} index={i} />
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Services;
