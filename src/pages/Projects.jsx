@@ -12,15 +12,6 @@ const projects = [
     year: "2025",
   },
   {
-    id: "zms",
-    name: "Zoo Management System",
-    blurb:
-      "Ticketing and operations for a zoo. Animals, admins, orders and scheduled visits behind role-based access.",
-    source: "https://github.com/ankitXD/ZMS",
-    stack: "React · Express · MongoDB",
-    year: "2025",
-  },
-  {
     id: "newspaper-tracker-bot",
     name: "Newspaper Tracker",
     blurb:
@@ -39,7 +30,7 @@ const Projects = () => (
           Selected work
         </h2>
         <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
-          Three projects
+          Two projects
         </span>
       </div>
 

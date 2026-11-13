@@ -33,13 +33,3 @@ body {
     @apply underline decoration-line decoration-1 underline-offset-[3px] transition-colors hover:decoration-cobalt;
   }
 }
-
-@keyframes sway {
-  0%,
-  100% {
-    transform: rotate(-1.6deg);
-  }
-  50% {
-    transform: rotate(1.6deg);
-  }
-}

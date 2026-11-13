@@ -12,6 +12,15 @@ export default {
       maxWidth: {
         page: "1200px",
       },
+      keyframes: {
+        ripple: {
+          from: { transform: "scale(0)", opacity: "0.55" },
+          to: { transform: "scale(1)", opacity: "0" },
+        },
+      },
+      animation: {
+        ripple: "ripple 620ms cubic-bezier(0.2, 0.6, 0.2, 1) forwards",
+      },
       colors: {
         paper: "#fcfcfc",
         ink: "#060606",

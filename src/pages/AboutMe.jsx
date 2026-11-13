@@ -13,21 +13,6 @@ const experience = [
   },
 ];
 
-const skills = [
-  "React",
-  "TypeScript",
-  "Tailwind",
-  "Node.js",
-  "Express",
-  "MongoDB",
-  "Postgres",
-  "Prisma",
-  "REST",
-  "JWT",
-  "Figma",
-  "Vercel",
-];
-
 const AboutMe = () => (
   <section id="about" aria-label="About" className="scroll-mt-16 bg-paper">
     <div className="mx-auto max-w-page px-6 pb-20 sm:px-10 sm:pb-24">
@@ -41,19 +26,6 @@ const AboutMe = () => (
             after the first release, and about interfaces that do not need
             explaining.
           </p>
-
-          <div className="mt-10">
-            <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-mute">
-              Toolkit
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
-              {skills.map((s) => (
-                <li key={s} className="font-serif text-[15px] text-ink/80">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
 
         <div>
